@@ -45,6 +45,33 @@
     </style>
 </head>
 <body>
+    <!-- Скрытый аудиоплеер, который будет ждать команды -->
+<audio id="bg-music" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+  Ваш браузер не поддерживает аудио.
+</audio>
+
+<script>
+  // Находим элемент audio и всю страницу
+  const audio = document.getElementById('bg-music');
+  const body = document.body;
+
+  // Как только пользователь кликнет по странице, пробуем включить музыку
+  body.addEventListener('click', function() {
+    // Используем промис для обработки возможной ошибки автозапуска
+    let playPromise = audio.play();
+
+    if (playPromise !== undefined) {
+      playPromise.then(function() {
+        // Автовоспроизведение началось успешно
+        console.log("Музыка играет");
+      }).catch(function(error) {
+        // Автовоспроизведение заблокировано
+        console.log("Автовоспроизведение не удалось");
+      });
+    }
+  });
+</script>
     <div class="fullscreen">
         <img src="otkrytka.gif" alt="Анимированная открытка на 8 марта">
         <div class="overlay">
@@ -54,3 +81,4 @@
     </div>
 </body>
 </html>
+
